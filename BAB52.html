@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB52</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB1</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan Kosakata</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 15px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  .result {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .wrong { color: red; }
+  .correct { color: green; }
+  ol { text-align:left; max-height:400px; overflow:auto; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question"></h2>
+  <input type="text" id="answerInput" placeholder="Tulis jawaban di sini">
+  <br>
+  <button id="nextBtn">Selanjutnya</button>
+</div>
+
+<script>
+let questions = [
+{ soal: "음식 조리", jawaban: "memasak makanan" },
+{ soal: "식칼", jawaban: "pisau dapur" },
+{ soal: "해동하다", jawaban: "mencairkan" },
+{ soal: "도마", jawaban: "talenan" },
+{ soal: "K-푸드 산업", jawaban: "industri makanan Korea" },
+{ soal: "국자", jawaban: "sendok sayur" },
+{ soal: "식재료", jawaban: "bahan-bahan makanan" },
+{ soal: "강판", jawaban: "parutan" },
+{ soal: "주문서를 확인하다", jawaban: "memeriksa formulir pesanan" },
+{ soal: "껍질 벗기기(필러)", jawaban: "pengupas" },
+{ soal: "냉장 보관", jawaban: "penyimpanan dingin" },
+{ soal: "뒤집개", jawaban: "spatula" },
+{ soal: "검수하다", jawaban: "memeriksa" },
+{ soal: "주걱", jawaban: "centong nasi" },
+{ soal: "밀폐용기", jawaban: "wadah kedap udara" },
+{ soal: "치즈", jawaban: "keju" },
+{ soal: "소비 기한", jawaban: "tanggal kedaluwarsa" },
+{ soal: "쌀", jawaban: "beras" },
+{ soal: "대용량", jawaban: "kapasitas besar" },
+{ soal: "손질하다", jawaban: "membersihkan/memangkas" },
+{ soal: "개봉하다", jawaban: "membuka" },
+{ soal: "식자재", jawaban: "bahan makanan" },
+{ soal: "방금", jawaban: "baru saja" },
+{ soal: "소분하다", jawaban: "membagi, memisahkan" },
+{ soal: "금방", jawaban: "cepat, sebentar" },
+{ soal: "소스", jawaban: "saus" },
+{ soal: "랩", jawaban: "plastik pembungkus" },
+{ soal: "통조림", jawaban: "makanan kalengan" },
+{ soal: "주방장님", jawaban: "koki" },
+{ soal: "주방용품", jawaban: "peralatan dapur" },
+{ soal: "세균 번식", jawaban: "pertumbuhan bakteri" },
+{ soal: "키친타월", jawaban: "tisu dapur" },
+{ soal: "식중독", jawaban: "keracunan makanan" },
+{ soal: "지퍼백", jawaban: "plastik zip" },
+{ soal: "세계", jawaban: "dunia" },
+{ soal: "비닐랩", jawaban: "plastik pembungkus" },
+{ soal: "성장하다", jawaban: "tumbuh" },
+{ soal: "위생백", jawaban: "kantong plastik higienis" },
+{ soal: "만두", jawaban: "pangsit" },
+{ soal: "망", jawaban: "jaring" },
+{ soal: "꾸준히", jawaban: "stabil, terus-menerus" },
+{ soal: "쿠킹 호일", jawaban: "kertas aluminium" },
+{ soal: "증가하다", jawaban: "meningkat" },
+{ soal: "썩다", jawaban: "busuk" },
+{ soal: "주목", jawaban: "perhatian" },
+{ soal: "시들다", jawaban: "layu" },
+{ soal: "현지인", jawaban: "penduduk lokal" },
+{ soal: "입맛", jawaban: "selera makan" },
+{ soal: "싹이 나다", jawaban: "bertunas" },
+{ soal: "맛", jawaban: "rasa" },
+{ soal: "신문", jawaban: "koran" },
+{ soal: "인지도", jawaban: "tingkat kesadaran" },
+{ soal: "서늘하다", jawaban: "sejuk" },
+{ soal: "돌파하다", jawaban: "menembus, terobosan" },
+{ soal: "선반", jawaban: "rak" },
+{ soal: "확산", jawaban: "penyebaran" },
+{ soal: "곡류", jawaban: "biji-bijian" },
+{ soal: "해산물", jawaban: "makanan laut" },
+{ soal: "육류", jawaban: "daging" },
+{ soal: "유제품", jawaban: "produk susu" },
+{ soal: "실온", jawaban: "suhu kamar" },
+{ soal: "부패하다", jawaban: "membusuk" },
+{ soal: "상하다", jawaban: "rusak" },
+{ soal: "핏물이 생기다", jawaban: "keluar darah" },
+{ soal: "냄새가 나다", jawaban: "berbau" },
+{ soal: "한국의 김", jawaban: "rumput laut kering Korea" },
+{ soal: "벌레가 생기다", jawaban: "muncul ulat" },
+{ soal: "바삭하다", jawaban: "renyah" },
+{ soal: "곰팡이가 피다", jawaban: "muncul jamur" },
+{ soal: "식감", jawaban: "tekstur" },
+{ soal: "세균이 번식하다", jawaban: "bakteri berkembang biak" },
+{ soal: "식중독에 걸리다", jawaban: "terkena keracunan makanan" },
+{ soal: "중동", jawaban: "Timur Tengah" },
+{ soal: "남미", jawaban: "Amerika Selatan" },
+{ soal: "등", jawaban: "dan lain-lain" }
+];
+
+// Acak soal
+questions = questions.sort(() => Math.random() - 0.5);
+
+let index = 0;
+let score = 0;
+let userAnswers = [];
+
+const questionEl = document.getElementById("question");
+const answerInput = document.getElementById("answerInput");
+const nextBtn = document.getElementById("nextBtn");
+const card = document.querySelector(".card");
+
+function showQuestion() {
+  questionEl.textContent = "Soal " + (index + 1) + ": " + questions[index].soal;
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+nextBtn.addEventListener("click", () => {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  userAnswers[index] = userAnswer; // simpan jawaban sesuai index
+
+  if (userAnswer === questions[index].jawaban) {
+    score++;
+  }
+
+  index++;
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  let answerList = "";
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === q.jawaban) {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span></li>`;
+    } else {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span><br>
+                     Jawaban kamu: <span class="wrong">${userAnswers[i] || "(kosong)"}</span></li>`;
+    }
+  });
+
+  card.innerHTML = `
+    <h2>Hasil</h2>
+    <p class="result">Nilai: ${score} / ${questions.length}</p>
+    <hr>
+    <p>Kunci Jawaban:</p>
+    <ol>${answerList}</ol>
+  `;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
